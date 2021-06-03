@@ -8,9 +8,9 @@ abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout)
-        showDisconnectState()
         setupUI()
         setupLiveData()
+        showDisconnectState()
     }
 
     abstract fun setupUI() // внутри этого метода мы инициализируем все view
