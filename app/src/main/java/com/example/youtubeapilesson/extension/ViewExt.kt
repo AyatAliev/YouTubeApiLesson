@@ -17,6 +17,5 @@ var View.invisible: Boolean
         visibility = if (value) View.INVISIBLE else View.VISIBLE
     }
 
-
 fun ViewGroup.inflate(@LayoutRes layoutId: Int): View =
     LayoutInflater.from(context).inflate(layoutId, this, false)
