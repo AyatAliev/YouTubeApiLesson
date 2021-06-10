@@ -8,9 +8,9 @@ data class PlayList(
 )
 
 data class Thumbnails(
-    var default: Default,
-    var medium: Medium,
-    var high: High
+    var default: Default? = null,
+    var medium: Medium? = null,
+    var high: High? = null
 )
 
 data class Snippet(
