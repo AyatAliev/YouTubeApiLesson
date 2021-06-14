@@ -2,6 +2,7 @@ package com.example.youtubeapilesson.ui.main
 
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.youtubeapilesson.R
 import com.example.youtubeapilesson.base.BaseActivity
 import com.example.youtubeapilesson.extension.visible
@@ -12,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
-    private val list = mutableListOf<Items>()
+    private val list = arrayListOf<Items>()
     private val mainAdapter: MainAdapter by lazy { MainAdapter(list, this::onHolderClick) }
     private val viewModel: MainViewModel by viewModel()
 
@@ -29,13 +30,17 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun setupLiveData() {
 
+        viewModel.setBoolean(true)
+
         viewModel.loading.observe(this, {
             progress_bar.visible = it
         })
 
-        viewModel.fetchAllPlayList().observe(this, { response ->
+        viewModel.fetchAllPlayList.observe(this, { response ->
             when (response.status) {
                 Status.SUCCESS -> {
+
+                    response.data?.kind
                     response?.data?.items.let { it?.let { it1 -> list.addAll(it1) } }
                     setupRecyclerView()
                     mainAdapter.notifyDataSetChanged()
